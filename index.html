@@ -117,9 +117,16 @@
             <div>
                 <h2 id="modalTitle" style="font-size: 18px; font-weight:700; text-transform:uppercase; margin-bottom: 10px;"></h2>
                 <div id="modalPrice" style="font-size: 22px; font-weight:800; margin-bottom: 15px;"></div>
-                <div id="modalSizes" style="font-size: 12px; font-weight:600; color:#555; margin-bottom: 15px;"></div>
-                <div id="modalDesc" style="font-size: 12px; color:#666; line-height: 1.6; max-height: 220px; overflow-y:auto; border-top:1px solid #eee; padding-top:15px;"></div>
-                <button class="btn-buy" onclick="orderWhatsApp()">Оформить заказ в MODA MI</button>
+                <div style="margin-bottom: 15px;">
+                    <div style="font-size: 12px; font-weight:700; text-transform:uppercase; margin-bottom: 8px; color:#111;">Выберите размер:</div>
+                    <div id="modalSizesContainer" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                </div>
+                <div id="modalDesc" style="font-size: 12px; color:#666; line-height: 1.6; max-height: 180px; overflow-y:auto; border-top:1px solid #eee; padding-top:15px; margin-bottom: 15px;"></div>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="btn-buy" onclick="orderTelegram()" style="background: #0088cc; margin-top:0;">Написать в Telegram</button>
+                    <button class="btn-buy" onclick="orderMax()" style="background: #111111; margin-top:0;">Написать в MAX</button>
+                </div>
             </div>
         </div>
     </div>
@@ -226,21 +233,68 @@
         }
 
         let currentItem = null;
+        let selectedSize = '';
+
         function openModal(item) {
             currentItem = item;
+            selectedSize = '';
             document.getElementById('modalImg').src = item.image;
             document.getElementById('modalTitle').innerText = item.title + ' (АРТ: ' + item.id + ')';
             document.getElementById('modalPrice').innerText = item.price + ' ₽';
-            document.getElementById('modalSizes').innerText = 'РАЗМЕРЫ В НАЛИЧИИ: ' + (item.sizes.join(', ') || 'уточняйте');
             document.getElementById('modalDesc').innerText = item.description;
+
+            // Render interactive size selector
+            const container = document.getElementById('modalSizesContainer');
+            container.innerHTML = '';
+            
+            if (item.sizes && item.sizes.length > 0) {
+                item.sizes.forEach((s, idx) => {
+                    const chip = document.createElement('button');
+                    chip.type = 'button';
+                    chip.innerText = s;
+                    chip.className = 'size-chip';
+                    chip.style.cssText = 'padding: 8px 14px; border: 1px solid #111; background: #fff; color: #111; font-weight: 600; font-size: 13px; cursor: pointer; border-radius: 4px; transition: 0.2s;';
+                    chip.onclick = () => selectSize(chip, s);
+                    if (idx === 0) selectSize(chip, s); // Select first size by default
+                    container.appendChild(chip);
+                });
+            } else {
+                container.innerHTML = '<span style="font-size:12px; color:#888;">Размер уточняйте при заказе</span>';
+            }
+
             document.getElementById('modal').style.display = 'flex';
         }
 
+        function selectSize(btn, size) {
+            selectedSize = size;
+            document.querySelectorAll('.size-chip').forEach(b => {
+                b.style.background = '#ffffff';
+                b.style.color = '#111111';
+            });
+            btn.style.background = '#111111';
+            btn.style.color = '#ffffff';
+        }
+
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
-        function orderWhatsApp() {
+
+        function getOrderMessage() {
+            const sizeStr = selectedSize ? ` (Размер: ${selectedSize})` : '';
+            return `Здравствуйте! Хочу заказать в MODA MI: ${currentItem.title} (Артикул: ${currentItem.id})${sizeStr} за ${currentItem.price} ₽`;
+        }
+
+        function orderTelegram() {
             if (!currentItem) return;
-            const msg = `Здравствуйте! Хочу заказать в MODA MI: ${currentItem.title} (Артикул: ${currentItem.id}) за ${currentItem.price} руб.`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            const msg = getOrderMessage();
+            window.open(`https://t.me/share/url?url=&text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function orderMax() {
+            if (!currentItem) return;
+            const msg = getOrderMessage();
+            alert(`Заказ подготовлен:\n\n"${msg}"\n\nСкопировано в буфер обмена для отправки МАКС.`);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(msg);
+            }
         }
 
         renderProducts(products);
