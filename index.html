@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MODA MI — Женская одежда и домашний трикотаж</title>
+    <title>MODA MI — Женская одежда больших размеров и домашний трикотаж</title>
+    
+    <!-- Open Graph Meta Tags (Превью ссылки в Telegram / соцсетях) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MODA MI — Каталог одежды больших размеров">
+    <meta property="og:description" content="Женская одежда и домашний трикотаж (размеры от 52 до 78). Доставка по всей России, оформление заказа в 1 клик!">
+    <meta property="og:image" content="https://vsehalaty.ru/files/catalog/photos/774/2-3.jpg">
+    <meta property="og:url" content="https://ylailina56-gif.github.io/moda-mi-shop/">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
@@ -13,26 +21,43 @@
         .top-bar { background: #000000; color: #ffffff; text-align: center; padding: 9px 15px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
         header { background: #ffffff; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; z-index: 100; }
-        .header-container { max-width: 1300px; margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-        .logo { font-size: 26px; font-weight: 800; letter-spacing: 3px; color: #000000; text-decoration: none; text-transform: uppercase; }
+        .header-container { max-width: 1300px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: 3px; color: #000000; text-decoration: none; text-transform: uppercase; }
         
-        .search-box { flex: 1; max-width: 450px; position: relative; }
+        .search-box { flex: 1; max-width: 400px; position: relative; }
         .search-box input { width: 100%; padding: 12px 18px; border: 1px solid #e0e0e0; border-radius: 30px; font-size: 13px; outline: none; background: #f9f9f9; transition: 0.2s; }
         .search-box input:focus { border-color: #000000; background: #ffffff; }
 
-        .hero { background: #f5f5f7; padding: 50px 20px; text-align: center; border-bottom: 1px solid #eeeeee; }
-        .hero h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 10px; }
-        .hero p { font-size: 14px; color: #666666; font-weight: 500; letter-spacing: 0.5px; }
+        /* Кнопка Корзины в шапке */
+        .header-cart-btn { background: #111111; color: #ffffff; border: none; padding: 10px 18px; border-radius: 25px; font-size: 12px; font-weight: 700; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; position: relative; }
+        .header-cart-btn:hover { background: #333333; }
+        .cart-badge { background: #0088cc; color: #ffffff; font-size: 11px; font-weight: 800; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
 
-        .main-container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
-        .controls-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; font-size: 13px; color: #666; }
+        .hero { background: #f5f5f7; padding: 40px 20px 25px 20px; text-align: center; border-bottom: 1px solid #eeeeee; }
+        .hero h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 8px; }
+        .hero p { font-size: 13px; color: #666666; font-weight: 500; letter-spacing: 0.5px; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        /* Блок доверия */
+        .trust-banner { max-width: 1300px; margin: 25px auto 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        .trust-item { background: #f9f9fb; border: 1px solid #f0f0f2; border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+        .trust-icon { font-size: 24px; }
+        .trust-title { font-size: 12px; font-weight: 700; color: #111; text-transform: uppercase; }
+        .trust-desc { font-size: 11px; color: #666; margin-top: 2px; }
+
+        /* Навигация */
+        .category-nav { display: flex; justify-content: center; gap: 8px; padding: 20px 20px 10px 20px; flex-wrap: wrap; }
+        .cat-btn { background: #f2f2f2; border: none; padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: 0.2s; }
+        .cat-btn:hover, .cat-btn.active { background: #000000; color: #ffffff; }
+
+        .main-container { max-width: 1300px; margin: 20px auto 40px auto; padding: 0 20px; }
+        .controls-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; font-size: 13px; color: #666; flex-wrap: wrap; gap: 15px; }
+        .control-select { padding: 8px 15px; border-radius: 20px; border: 1px solid #ddd; outline: none; font-size: 12px; font-weight: 600; cursor: pointer; background: #fff; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
         .product-card { background: #ffffff; border: 1px solid #f0f0f0; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s ease; }
         .product-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
         
-        /* Гарантирует, что фото не обрезаются */
-        .img-wrapper { width: 100%; height: 380px; background: #fafafa; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .img-wrapper { width: 100%; height: 360px; background: #fafafa; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; padding: 10px; }
         .product-img { width: 100%; height: 100%; object-fit: contain; }
 
         .product-details { padding: 15px; }
@@ -41,15 +66,36 @@
         .price-current { font-size: 16px; font-weight: 800; color: #000000; }
         .product-sizes-list { font-size: 11px; color: #888888; font-weight: 500; }
 
+        /* Модальные окна */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal-body { background: #ffffff; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 30px; border-radius: 8px; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        @media (max-width: 650px) { .modal-body { grid-template-columns: 1fr; } }
+        @media (max-width: 650px) { .modal-body { grid-template-columns: 1fr; padding: 20px; } }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; border: none; background: none; }
-        .modal-img { width: 100%; max-height: 420px; border-radius: 4px; object-fit: contain; background: #fafafa; }
+        .modal-img { width: 100%; max-height: 400px; border-radius: 4px; object-fit: contain; background: #fafafa; }
         
         .size-chip { padding: 8px 14px; border: 1px solid #111; background: #fff; color: #111; font-weight: 600; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.2s; }
-        .btn-buy { background: #0088cc; color: #ffffff; border: none; padding: 15px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 15px; cursor: pointer; border-radius: 4px; transition: 0.2s; }
-        .btn-buy:hover { opacity: 0.9; }
+        
+        /* Кнопки в модалках */
+        .btn-add-cart { background: #111111; color: #ffffff; border: none; padding: 14px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 10px; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+        .btn-add-cart:hover { background: #333333; }
+        .btn-buy-now { background: #0088cc; color: #ffffff; border: none; padding: 14px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 8px; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+
+        /* Стиль Корзины */
+        .cart-modal-body { background: #ffffff; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 25px; border-radius: 8px; position: relative; }
+        .cart-item { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .cart-item-img { width: 60px; height: 70px; object-fit: contain; background: #f9f9f9; border-radius: 4px; }
+        .cart-item-info { flex: 1; }
+        .cart-item-title { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .cart-item-meta { font-size: 11px; color: #666; margin-top: 3px; }
+        .cart-item-price { font-size: 14px; font-weight: 800; margin-top: 4px; }
+        .cart-qty-btn { background: #eee; border: none; width: 24px; height: 24px; border-radius: 4px; font-weight: 700; cursor: pointer; }
+        .cart-remove-btn { background: none; border: none; color: red; font-size: 16px; cursor: pointer; padding: 5px; }
+
+        .cart-total-box { display: flex; justify-content: space-between; align-items: center; font-size: 16px; font-weight: 800; padding: 20px 0 15px 0; border-top: 2px solid #111; margin-top: 15px; }
+
+        /* Плавающая кнопка Telegram */
+        .float-tg-btn { position: fixed; bottom: 25px; right: 25px; background: #0088cc; color: #ffffff; padding: 12px 20px; border-radius: 30px; box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4); text-decoration: none; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; z-index: 999; transition: transform 0.2s; }
+        .float-tg-btn:hover { transform: scale(1.05); }
 
         footer { background: #111111; color: #ffffff; padding: 40px 20px; margin-top: 60px; text-align: center; font-size: 12px; letter-spacing: 1px; }
     </style>
@@ -64,37 +110,122 @@
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Поиск товара, платья, артикула..." oninput="filterProducts()">
             </div>
+            <button class="header-cart-btn" onclick="openCartModal()">
+                🛒 Корзина <span class="cart-badge" id="cartBadge">0</span>
+            </button>
         </div>
     </header>
 
     <section class="hero">
         <h1>КАТАЛОГ ОДЕЖДЫ MODA MI</h1>
-        <p>Выбирайте вещи и оформляйте заказы прямо в Telegram</p>
+        <p>Размеры от 52 до 78 • Доставка Почтой России, СДЭК и Авито</p>
     </section>
+
+    <!-- Блок доверия -->
+    <div class="trust-banner">
+        <div class="trust-item">
+            <div class="trust-icon">🚚</div>
+            <div>
+                <div class="trust-title">Быстрая доставка</div>
+                <div class="trust-desc">Почта России, СДЭК, Авито по всей РФ</div>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">📏</div>
+            <div>
+                <div class="trust-title">Точные размеры</div>
+                <div class="trust-desc">Полное соответствие сетке 52–78</div>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">💬</div>
+            <div>
+                <div class="trust-title">Помощь в подборе</div>
+                <div class="trust-desc">Консультируем и делаем замеры в Telegram</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Категории -->
+    <div class="category-nav">
+        <button class="cat-btn active" onclick="setCategory('', this)">Все товары</button>
+        <button class="cat-btn" onclick="setCategory('Платье', this)">Платья</button>
+        <button class="cat-btn" onclick="setCategory('Халат', this)">Халаты</button>
+        <button class="cat-btn" onclick="setCategory('Костюм', this)">Костюмы</button>
+        <button class="cat-btn" onclick="setCategory('Брюки', this)">Брюки</button>
+    </div>
 
     <div class="main-container">
         <div class="controls-bar">
             <span id="itemsCount">Загрузка каталога...</span>
+            <div style="display: flex; gap: 10px;">
+                <select class="control-select" id="sizeFilter" onchange="filterProducts()">
+                    <option value="">Все размеры</option>
+                    <option value="52">52</option>
+                    <option value="56">56</option>
+                    <option value="60">60</option>
+                    <option value="64">64</option>
+                    <option value="66">66</option>
+                    <option value="68">68</option>
+                    <option value="70">70</option>
+                    <option value="72">72</option>
+                    <option value="74">74</option>
+                    <option value="76">76</option>
+                    <option value="78">78</option>
+                </select>
+                <select class="control-select" id="sortFilter" onchange="filterProducts()">
+                    <option value="default">Сортировка: по умолчанию</option>
+                    <option value="price-asc">Сначала дешевле</option>
+                    <option value="price-desc">Сначала дороже</option>
+                </select>
+            </div>
         </div>
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
+    <!-- Модальное окно просмотра товара -->
     <div class="modal-overlay" id="modal">
         <div class="modal-body">
             <button class="close-modal" onclick="closeModal()">&times;</button>
             <img id="modalImg" class="modal-img" src="" alt="">
             <div>
-                <h2 id="modalTitle" style="font-size: 17px; font-weight:700; text-transform:uppercase; margin-bottom: 10px;"></h2>
-                <div id="modalPrice" style="font-size: 22px; font-weight:800; margin-bottom: 15px;"></div>
-                <div style="margin-bottom: 15px;">
-                    <div style="font-size: 11px; font-weight:700; text-transform:uppercase; margin-bottom: 8px;">Выберите размер:</div>
-                    <div id="modalSizesContainer" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                <h2 id="modalTitle" style="font-size: 16px; font-weight:700; text-transform:uppercase; margin-bottom: 8px;"></h2>
+                <div id="modalPrice" style="font-size: 22px; font-weight:800; margin-bottom: 12px;"></div>
+                <div style="margin-bottom: 12px;">
+                    <div style="font-size: 11px; font-weight:700; text-transform:uppercase; margin-bottom: 6px;">Выберите размер:</div>
+                    <div id="modalSizesContainer" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
                 </div>
-                <div id="modalDesc" style="font-size: 12px; color:#666; line-height: 1.6; max-height: 160px; overflow-y:auto; border-top:1px solid #eee; padding-top:12px; margin-bottom: 15px;"></div>
-                <button class="btn-buy" onclick="orderTelegram()">Оформить заказ в Telegram</button>
+                <div id="modalDesc" style="font-size: 12px; color:#666; line-height: 1.5; max-height: 140px; overflow-y:auto; border-top:1px solid #eee; padding-top:10px; margin-bottom: 12px;"></div>
+                
+                <button class="btn-add-cart" onclick="addToCartCurrent()">🛒 Добавить в корзину</button>
+                <button class="btn-buy-now" onclick="orderTelegramDirect()">⚡ Заказать в 1 клик</button>
             </div>
         </div>
     </div>
+
+    <!-- Модальное окно Корзины -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="cart-modal-body">
+            <button class="close-modal" onclick="closeCartModal()">&times;</button>
+            <h2 style="font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;">Ваша корзина</h2>
+            <div id="cartItemsList"></div>
+            
+            <div class="cart-total-box">
+                <span>Итого:</span>
+                <span id="cartTotalSum">0 ₽</span>
+            </div>
+
+            <button class="btn-buy-now" onclick="sendCartOrderTelegram()" style="font-size: 13px; padding: 16px;">
+                Оформить заказ в Telegram
+            </button>
+        </div>
+    </div>
+
+    <!-- Плавающая кнопка Telegram -->
+    <a href="https://t.me/shopmoda37" target="_blank" class="float-tg-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.16l-2.02 9.53c-.32 1.41-1.16 1.76-2.34 1.11l-5.51-4.06-2.66 2.56c-.29.3-.54.55-1.1.55l.4-5.61 10.22-9.23c.44-.39-.1-.61-.69-.25L6.2 11.23l-5.43-1.7c-1.18-.37-1.2-1.18.25-1.67L22.25 3.55c.98-.36 1.84.23 1.56 1.61z"/></svg>
+        Задать вопрос
+    </a>
 
     <footer>
         <p>© 2026 MODA MI — ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
@@ -106,6 +237,8 @@
         let products = [];
         let currentItem = null;
         let selectedSize = '';
+        let activeCat = '';
+        let cart = JSON.parse(localStorage.getItem('moda_mi_cart') || '[]');
 
         function loadProducts() {
             Papa.parse(CSV_URL, {
@@ -127,20 +260,49 @@
                             id: item.id || item.ID || '—',
                             title: item.title || item.Title || 'Без названия',
                             category: item.category || item.Category || '',
-                            price: item.price || item.Price || '0',
+                            price: parseFloat(item.price || item.Price || '0') || 0,
                             sizes: sizeArr,
                             image: item.image || item.Image || '',
                             description: item.description || item.Description || ''
                         });
                     });
 
-                    renderProducts(products);
+                    filterProducts();
+                    updateCartBadge();
                 },
                 error: function(err) {
                     console.error("Ошибка загрузки CSV:", err);
                     document.getElementById('itemsCount').innerText = "Ошибка загрузки таблицы";
                 }
             });
+        }
+
+        function setCategory(cat, btn) {
+            activeCat = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            filterProducts();
+        }
+
+        function filterProducts() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            const sz = document.getElementById('sizeFilter').value;
+            const sort = document.getElementById('sortFilter').value;
+
+            let filtered = products.filter(p => {
+                const matchCat = !activeCat || p.title.toLowerCase().includes(activeCat.toLowerCase()) || p.category.toLowerCase().includes(activeCat.toLowerCase());
+                const matchQ = p.title.toLowerCase().includes(q) || p.id.toLowerCase().includes(q);
+                const matchSz = !sz || p.sizes.includes(sz);
+                return matchCat && matchQ && matchSz;
+            });
+
+            if (sort === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sort === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            renderProducts(filtered);
         }
 
         function renderProducts(items) {
@@ -150,7 +312,7 @@
             document.getElementById('itemsCount').innerText = `Показано товаров: ${items.length}`;
 
             if (items.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; color:#888;">Товары не найдены или пока отсутствуют в таблице</p>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; color:#888;">Товары не найдены</p>';
                 return;
             }
 
@@ -214,17 +376,121 @@
 
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-        function orderTelegram() {
+        /* Логика Корзины */
+        function addToCartCurrent() {
+            if (!currentItem) return;
+            const existing = cart.find(c => c.id === currentItem.id && c.size === selectedSize);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: currentItem.id,
+                    title: currentItem.title,
+                    price: currentItem.price,
+                    image: currentItem.image,
+                    size: selectedSize || 'без размера',
+                    qty: 1
+                });
+            }
+            saveCart();
+            closeModal();
+            openCartModal();
+        }
+
+        function updateCartBadge() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartBadge').innerText = count;
+        }
+
+        function saveCart() {
+            localStorage.setItem('moda_mi_cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        function openCartModal() {
+            renderCartItems();
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            renderCartItems();
+        }
+
+        function removeCartItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<p style="text-align:center; padding: 30px; color:#888;">Ваша корзина пока пуста</p>';
+                document.getElementById('cartTotalSum').innerText = '0 ₽';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'cart-item';
+                row.innerHTML = `
+                    <img class="cart-item-img" src="${item.image}" alt="">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.title} (Арт: ${item.id})</div>
+                        <div class="cart-item-meta">Размер: <b>${item.size}</b></div>
+                        <div class="cart-item-price">${item.price} ₽</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <button class="cart-qty-btn" onclick="changeQty(${idx}, -1)">-</button>
+                        <span style="font-size:13px; font-weight:700;">${item.qty}</span>
+                        <button class="cart-qty-btn" onclick="changeQty(${idx}, 1)">+</button>
+                    </div>
+                    <button class="cart-remove-btn" onclick="removeCartItem(${idx})">&times;</button>
+                `;
+                list.appendChild(row);
+            });
+
+            document.getElementById('cartTotalSum').innerText = total + ' ₽';
+        }
+
+        function sendCartOrderTelegram() {
+            if (cart.length === 0) {
+                alert('Корзина пуста!');
+                return;
+            }
+
+            let msg = "Здравствуйте! Хочу оформить заказ в MODA MI:\n\n";
+            let total = 0;
+
+            cart.forEach((item, i) => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                msg += `${i + 1}. ${item.title} (Арт: ${item.id})\n   • Размер: ${item.size}\n   • Кол-во: ${item.qty} шт. x ${item.price} ₽ = ${subtotal} ₽\n\n`;
+            });
+
+            msg += `Итоговая сумма заказа: ${total} ₽`;
+
+            window.open(`https://t.me/shopmoda37?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function orderTelegramDirect() {
             if (!currentItem) return;
             const sizeStr = selectedSize ? ` (Размер: ${selectedSize})` : '';
             const msg = `Здравствуйте! Хочу заказать в MODA MI: ${currentItem.title} (Артикул: ${currentItem.id})${sizeStr} за ${currentItem.price} ₽`;
             window.open(`https://t.me/shopmoda37?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        function filterProducts() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
-            renderProducts(filtered);
         }
 
         loadProducts();
